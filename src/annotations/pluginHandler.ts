@@ -1,5 +1,5 @@
 import "reflect-metadata";
-import { META_PLUGIN_OPTS, PluginList } from "../../models/metaData.model";
+import { META_PLUGIN_OPTS, PluginList } from "../models/metaData.model";
 
 export function PluginHandler(options?: any) {
   return function (classCtor: any, member: string) {
@@ -9,7 +9,7 @@ export function PluginHandler(options?: any) {
   };
 }
 
-function addToClassPluginList(classCtor: any, member: string) {
+function addToClassPluginList(classCtor: any, member: string): void {
   classCtor[PluginList] = classCtor[PluginList] || [];
   classCtor[PluginList].push(member);
 }

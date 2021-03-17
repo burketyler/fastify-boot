@@ -13,7 +13,7 @@ export * from "./annotations/requestHooks/onResponse";
 export * from "./annotations/requestHooks/onRequest";
 export * from "./annotations/requestHooks/onSend";
 export * from "./annotations/requestHooks/hook";
-export * from "./annotations/requestHooks/pluginHandler";
+export * from "./annotations/pluginHandler";
 export * from "./annotations/requestMapping/deleteMapping";
 export * from "./annotations/requestMapping/requestMapping";
 export * from "./annotations/requestMapping/postMapping";
@@ -22,11 +22,17 @@ export * from "./annotations/requestMapping/optionsMapping";
 export * from "./annotations/requestMapping/patchMapping";
 export * from "./annotations/requestMapping/putMapping";
 export * from "./models/controller.model";
-export * from "./models/hooks.model";
-//export * from "./models/injectableType.model";
-export * from "./models/metaData.model";
+export { HookOptions } from "./models/hooks.model";
+export { TOKEN_FASTIFY } from "./models/metaData.model";
 export * from "./models/plugins";
 export * from "./functions/loadGlobalHooks";
 export * from "./functions/loadPlugins";
 export * from "./functions/loadSharedSchemas";
-export * from "ts-injection";
+export {
+  resolve,
+  Injectable,
+  register,
+  useDebugger,
+  useInjectionContext,
+  Autowire,
+} from "ts-injection";
