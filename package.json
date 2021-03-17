@@ -1,6 +1,6 @@
 {
   "name": "fastify-boot",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Annotation framework and opinionated bootstrapper for Fastify.",
   "repository": "https://github.com/burketyler/fastify-boot",
   "author": "Tyler Burke",
