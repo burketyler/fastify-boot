@@ -6,15 +6,17 @@ const config = require("../../../webpack.config");
 
 const appDir = fs.realpathSync(process.cwd());
 const bootDir = fs.realpathSync(path.join(__dirname, "../../../"));
+const buildEnv = process.env["FSF_BUILD_ENV"];
+const webpackMode = buildEnv === "production" ? "production" : "development";
 
-build(config);
+build({ ...config, mode: webpackMode });
 
 function build(config: any): void {
   validateImportantFiles();
   const compiler = webpack(config);
   compiler.hooks.beforeRun.tap("fastify-boot", injectBootstrap);
   compiler.hooks.afterDone.tap("fastify-boot", removeBootstrap);
-  console.log(chalk.cyan("Running Webpack build..."));
+  console.log(chalk.cyan(`Running Webpack build in ${webpackMode} mode...`));
   compiler.run(handleWebpackCb);
 }
 

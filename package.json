@@ -1,14 +1,17 @@
 {
   "name": "fastify-boot",
-  "version": "1.0.1",
-  "description": "Annotation framework and opinionated bootstrapper for Fastify.",
+  "version": "1.0.5",
+  "description": "A Spring Boot inspired opinionated view on bootstrapping, buildings and running a Fastify web application.",
   "repository": "https://github.com/burketyler/fastify-boot",
   "author": "Tyler Burke",
-  "main": "./.build/src/index.js",
-  "types": "./.build/src/index.d.ts",
+  "main": ".build/src/index.js",
+  "types": ".build/src/index.d.ts",
   "license": "MIT",
   "files": [
-    ".build"
+    ".build",
+    "webpack.config.js",
+    "bootstrap.js",
+    "dotenv.js"
   ],
   "publishConfig": {
     "access": "public"
@@ -26,27 +29,30 @@
     "cm": "git-cz"
   },
   "dependencies": {
+    "chalk": "^4.1.0",
+    "cross-spawn": "^7.0.3",
+    "dotenv": "^8.2.0",
     "reflect-metadata": "^0.1.13",
-    "ts-injection": "^1.0.3"
+    "ts-injection": "^1.1.5",
+    "ts-loader": "^8.0.18",
+    "webpack": "^5.26.0",
+    "webpack-node-externals": "^2.5.2",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
+    "@types/jest": "^26.0.21",
     "@types/node": "^14.14.35",
     "@types/webpack-env": "^1.16.0",
-    "chalk": "^4.1.0",
     "commitizen": "^4.2.3",
     "commitlint": "^12.0.1",
-    "cross-spawn": "^7.0.3",
     "cz-customizable": "^6.3.0",
     "fastify": "^3.14.0",
     "jest": "^26.6.3",
     "prettier": "^2.2.1",
     "ts-jest": "^26.5.3",
-    "ts-loader": "^8.0.18",
     "tslint": "^6.1.3",
-    "typescript": "^4.2.3",
-    "webpack": "^5.26.0",
-    "webpack-node-externals": "^2.5.2"
+    "typescript": "^4.2.3"
   },
   "config": {
     "commitizen": {
