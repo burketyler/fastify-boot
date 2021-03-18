@@ -1,7 +1,7 @@
 {
   "name": "fastify-boot",
-  "version": "1.0.4",
-  "description": "Annotation framework and opinionated bootstrapper for Fastify.",
+  "version": "1.0.5",
+  "description": "A Spring Boot inspired opinionated view on bootstrapping, buildings and running a Fastify web application.",
   "repository": "https://github.com/burketyler/fastify-boot",
   "author": "Tyler Burke",
   "main": ".build/src/index.js",
@@ -10,7 +10,8 @@
   "files": [
     ".build",
     "webpack.config.js",
-    "bootstrap.js"
+    "bootstrap.js",
+    "dotenv.js"
   ],
   "publishConfig": {
     "access": "public"
@@ -30,14 +31,17 @@
   "dependencies": {
     "chalk": "^4.1.0",
     "cross-spawn": "^7.0.3",
+    "dotenv": "^8.2.0",
     "reflect-metadata": "^0.1.13",
-    "ts-injection": "^1.0.4",
+    "ts-injection": "^1.1.5",
     "ts-loader": "^8.0.18",
     "webpack": "^5.26.0",
-    "webpack-node-externals": "^2.5.2"
+    "webpack-node-externals": "^2.5.2",
+    "yargs": "^16.2.0"
   },
   "devDependencies": {
     "@types/cross-spawn": "^6.0.2",
+    "@types/jest": "^26.0.21",
     "@types/node": "^14.14.35",
     "@types/webpack-env": "^1.16.0",
     "commitizen": "^4.2.3",

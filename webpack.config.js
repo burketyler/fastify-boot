@@ -9,7 +9,6 @@ const bootModules = path.join(bootDir, "/node_modules");
 
 module.exports = {
   target: "node",
-  mode: "production",
   devtool: "nosources-source-map",
   entry: path.join(appDir, "/.build/bootstrap.js"),
   externals: [

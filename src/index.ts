@@ -35,4 +35,5 @@ export {
   useDebugger,
   useInjectionContext,
   Autowire,
+  Env,
 } from "ts-injection";
