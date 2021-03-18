@@ -4,7 +4,7 @@ const Boot = require("fastify-boot");
 const { logger } = Boot.useDebugger("Bootstrap");
 
 bootstrap();
-require("../index");
+require("../src/index");
 
 function bootstrap() {
   const fastify = createInstance();

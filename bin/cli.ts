@@ -2,6 +2,7 @@
 
 import spawn from "cross-spawn";
 import yargs, { Arguments } from "yargs";
+import chalk from "chalk";
 
 yargs
   .scriptName("fastify-boot-cli")
@@ -64,7 +65,9 @@ function runScript(args: string[]): void {
     (outcome.signal === "SIGKILL" || outcome.signal === "SIGTERM")
   ) {
     console.log(
-      "Script failed because the process exited too early. Something may be killing the process."
+      chalk.redBright(
+        "Script failed because the process exited too early. Something may be killing the process."
+      )
     );
     process.exit(1);
   }

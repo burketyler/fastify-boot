@@ -121,8 +121,8 @@ function validateImportantFiles(): void {
     `A typescript config is required at ${appDir}/tsconfig.json!`
   );
   throwIfDoesntExist(
-    path.join(appDir, "index.ts"),
-    `Missing required file ${appDir}/index.ts!`
+    path.join(appDir, "src/index.ts"),
+    chalk.redBright(`Missing required file ${appDir}/src/index.ts`)
   );
 }
 
