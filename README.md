@@ -95,11 +95,11 @@ export class App {
 }
 ```
 
-### @FastifyApplication  (Class only)
+### @FastifyApplication
 
 Apply this annotation to the main entry class of your application only. It starts bootstrapping your Fastify instance.
 
-### @FastifyServer()  (Class member only)
+### @FastifyServer()
 
 Injects the Fastify server instance into a class member for consumption.
 
