@@ -9,7 +9,7 @@ yargs
   .usage("$0 <cmd> [args]")
   .command(
     "build [env]",
-    "Compile your code with Webpack into an executable bundle.",
+    "Compile your code with Webpack into a single bundle file.",
     (args) => {
       args.positional("env", {
         type: "string",

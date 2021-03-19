@@ -24,7 +24,7 @@ export * from "./annotations/requestMapping/putMapping";
 export * from "./models/controller.model";
 export { HookOptions } from "./models/hooks.model";
 export { TOKEN_FASTIFY } from "./models/metaData.model";
-export * from "./models/plugins";
+export * from "./models/plugins.model";
 export * from "./functions/loadGlobalHooks";
 export * from "./functions/loadPlugins";
 export * from "./functions/loadSharedSchemas";

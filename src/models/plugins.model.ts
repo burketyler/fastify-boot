@@ -12,7 +12,7 @@ export type PluginFunction = (
   done: () => void
 ) => void;
 
-export interface RegisterArguments {
+export interface PluginObject {
   plugin: PluginFunction;
   opts: any;
 }

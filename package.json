@@ -1,6 +1,6 @@
 {
   "name": "fastify-boot",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "A Spring Boot inspired opinionated view on building and bootstrapping a Fastify web application.",
   "repository": "https://github.com/burketyler/fastify-boot",
   "author": "Tyler Burke",
