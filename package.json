@@ -1,6 +1,6 @@
 {
   "name": "fastify-boot",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "A Spring Boot inspired opinionated view on building and bootstrapping a Fastify web application.",
   "repository": "https://github.com/burketyler/fastify-boot",
   "author": "Tyler Burke",
@@ -18,7 +18,7 @@
     "access": "public"
   },
   "bin": {
-    "fastify-boot": "node .build/bin/cli.js"
+    "fastify-boot": ".build/bin/cli.js"
   },
   "scripts": {
     "clean": "rm -rf .build",
