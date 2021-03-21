@@ -3,6 +3,7 @@
 import spawn from "cross-spawn";
 import yargs, { Arguments } from "yargs";
 import chalk from "chalk";
+import path from "path";
 
 yargs
   .scriptName("fastify-boot-cli")
@@ -20,7 +21,9 @@ yargs
     },
     (args: Arguments<{ env: string }>): void => {
       process.env["FSF_BUILD_ENV"] = args.env;
-      runScript([require.resolve(`../src/scripts/build.js`)]);
+      runScript([
+        require.resolve(path.join("..", "src", "scripts", "build.js")),
+      ]);
     }
   )
   .command(
@@ -37,8 +40,8 @@ yargs
       process.env["FSF_START_ENV"] = args.env;
       runScript([
         "-r",
-        require.resolve(`../../dotenv.js`),
-        require.resolve(`../src/scripts/start.js`),
+        require.resolve(path.join("..", "..", "dotenv.js")),
+        require.resolve(path.join("..", "src", "scripts", "start.js")),
       ]);
     }
   )
@@ -51,7 +54,10 @@ yargs
       Object.entries(args).forEach(([arg, value]) => {
         passedArgs.push(`--${arg}='${value}'`);
       });
-      runScript([require.resolve(`../src/scripts/runJest.js`), ...passedArgs]);
+      runScript([
+        require.resolve(path.join("..", "src", "scripts", "runJest.js")),
+        ...passedArgs,
+      ]);
     }
   )
   .help().argv;

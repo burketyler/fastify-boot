@@ -36,12 +36,12 @@ function bootstrapInstance(fastify) {
 }
 
 function loadControllers() {
-  requireFilesByContext(require.context("../", true, /\.controller\./));
+  requireFilesByContext(require.context("..", true, /\.controller\./));
 }
 
 function processSchemas(fastify) {
   const schemas = requireFilesByContext(
-    require.context("../", true, /\.schema\./)
+    require.context("..", true, /\.schema\./)
   );
   Object.values(schemas).forEach((file) => {
     Boot.loadSharedSchemas(fastify, file);
@@ -49,7 +49,7 @@ function processSchemas(fastify) {
 }
 
 function processHooks(fastify) {
-  const hooks = requireFilesByContext(require.context("../", true, /\.hook\./));
+  const hooks = requireFilesByContext(require.context("..", true, /\.hook\./));
   Object.values(hooks).forEach((file) => {
     Boot.loadGlobalHooks(fastify, file);
   });
@@ -57,7 +57,7 @@ function processHooks(fastify) {
 
 function processPlugins(fastify) {
   const plugins = requireFilesByContext(
-    require.context("../", true, /\.plugin\./)
+    require.context("..", true, /\.plugin\./)
   );
   Object.values(plugins).forEach((file) => {
     Boot.loadPlugins(fastify, file);

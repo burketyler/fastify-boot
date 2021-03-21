@@ -11,12 +11,14 @@ run([
   `--config='${jestConfig}'`,
   "--watchAll",
   `--roots='${appDir}'`,
-  `--coverageDirectory='${appDir}/coverage'`,
+  `--coverageDirectory='${path.join(appDir, "coverage")}`,
   ...filterArgs(),
 ]);
 
 function getJestConfigPath(): string {
-  return fs.realpathSync(path.join(__dirname, "../../../jest.config.js"));
+  return fs.realpathSync(
+    path.join(__dirname, "..", "..", "..", "jest.config.js")
+  );
 }
 
 function filterArgs(): string[] {

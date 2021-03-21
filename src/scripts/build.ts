@@ -2,10 +2,11 @@ import fs from "fs";
 import path from "path";
 import webpack, { MultiStats, Stats, StatsCompilation } from "webpack";
 import chalk from "chalk";
+import os from "os";
 const config = require("../../../webpack.config");
 
 const appDir = fs.realpathSync(process.cwd());
-const bootDir = fs.realpathSync(path.join(__dirname, "../../../"));
+const bootDir = fs.realpathSync(path.join(__dirname, "..", "..", ".."));
 const buildEnv = process.env["FSF_BUILD_ENV"];
 const webpackMode = buildEnv === "production" ? "production" : "development";
 
@@ -16,13 +17,13 @@ function build(config: any): void {
   const compiler = webpack(config);
   compiler.hooks.beforeRun.tap("fastify-boot", injectBootstrap);
   compiler.hooks.afterDone.tap("fastify-boot", removeBootstrap);
-  console.log(chalk.cyan(`Running Webpack build in ${webpackMode} mode...`));
+  console.log(chalk.cyan(`Running Webpack in ${webpackMode} mode...`));
   compiler.run(handleWebpackCb);
 }
 
 function injectBootstrap(): void {
   const bootFile = path.join(bootDir, "bootstrap.js");
-  const appFile = path.join(appDir, ".build/bootstrap.js");
+  const appFile = path.join(appDir, ".build", "bootstrap.js");
   console.log(chalk.gray("Bootstrapping index.ts"));
   makeDirIfNotExist(path.join(appDir, ".build"));
   fs.copyFileSync(bootFile, appFile);
@@ -35,7 +36,7 @@ function makeDirIfNotExist(dir: string): void {
 }
 
 function removeBootstrap(): void {
-  const file = path.join(appDir, ".build/bootstrap.js");
+  const file = path.join(appDir, ".build", "bootstrap.js");
   if (fs.existsSync(file)) {
     fs.rmSync(file);
   }
@@ -71,7 +72,7 @@ function handleNoResult(): void {
 function handleWebpackErrors(stats: StatsCompilation): void {
   console.log(
     chalk.red(
-      "The Typescript compiler threw the following errors while compiling your code:\n"
+      `The Typescript compiler threw the following errors while compiling your code:${os.EOL}`
     )
   );
   stats.errors.forEach((compileError) => {
@@ -82,7 +83,9 @@ function handleWebpackErrors(stats: StatsCompilation): void {
 
 function handleWebpackWarnings(stats: StatsCompilation): void {
   console.log(
-    chalk.yellow("The following warnings emitted during the build:\n")
+    chalk.yellow(
+      `The following warnings were emitted during the build:${os.EOL}`
+    )
   );
   stats.warnings.forEach((warning) => {
     console.warn(warning.message);
@@ -118,11 +121,13 @@ function handleSuccess(stats: StatsCompilation): void {
 function validateImportantFiles(): void {
   throwIfDoesntExist(
     path.join(appDir, "tsconfig.json"),
-    `A typescript config is required at ${appDir}/tsconfig.json!`
+    `A valid tsconfig is required in your project's root directory: ${appDir}`
   );
   throwIfDoesntExist(
     path.join(appDir, "src/index.ts"),
-    chalk.redBright(`Missing required file ${appDir}/src/index.ts`)
+    chalk.redBright(
+      `Missing required file ${path.join(appDir, "src", "index.ts")}`
+    )
   );
 }
 
