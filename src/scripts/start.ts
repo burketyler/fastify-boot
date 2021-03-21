@@ -1,5 +1,6 @@
 import fs from "fs";
 import chalk from "chalk";
+import path from "path";
 import { spawnSync } from "child_process";
 
 const appDir = fs.realpathSync(process.cwd());
@@ -8,9 +9,13 @@ start();
 
 function start() {
   console.log(chalk.cyan("Starting Fastify server..."));
-  const outcome = spawnSync(process.execPath, [`${appDir}/.build/index.js`], {
-    stdio: "inherit",
-  });
+  const outcome = spawnSync(
+    process.execPath,
+    [path.join(appDir, ".build", "index.js")],
+    {
+      stdio: "inherit",
+    }
+  );
   if (
     outcome.signal &&
     (outcome.signal === "SIGKILL" || outcome.signal === "SIGTERM")
