@@ -1,6 +1,6 @@
 {
   "name": "fastify-boot",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "A Spring Boot inspired opinionated view on building and bootstrapping a Fastify web application.",
   "repository": "https://github.com/burketyler/fastify-boot",
   "author": "Tyler Burke",
@@ -25,7 +25,7 @@
     "build": "yarn clean && tsc && chmod +x .build/bin/cli.js",
     "prettier": "prettier --write \"**/*.ts\" --loglevel error",
     "tslint": "tslint -c ./tslint.json src/**/*.ts",
-    "release": "yarn prettier && yarn tslint && yarn build",
+    "release": "yarn prettier && yarn tslint && yarn build && yarn publish",
     "test": "jest",
     "cm": "git-cz"
   },

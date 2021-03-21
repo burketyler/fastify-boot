@@ -17,6 +17,49 @@ Some key features include:
 # Table of Contents
 
 <!--ts-->
+   * [Setup](#setup)
+      * [Install](#install)
+   * [Getting started](#getting-started)
+      * [CLI](#cli)
+      * [Dependency Injection](#dependency-injection)
+      * [Configuration](#configuration)
+         * [Fastify Options](#fastify-options)
+         * [Environment variables](#environment-variables)
+            * [Defining](#defining)
+            * [Consuming](#consuming)
+      * [Application](#application)
+         * [Fastify instance](#fastify-instance)
+      * [Controllers](#controllers)
+         * [Controller Hooks](#controller-hooks)
+         * [Route Hooks](#route-hooks)
+      * [Hooks](#hooks)
+         * [Global Hook Containers](#global-hook-containers)
+         * [Global Hook Functions](#global-hook-functions)
+            * [Supported hooks](#supported-hooks)
+      * [Plugins](#plugins)
+         * [Plugin Containers](#plugin-containers)
+         * [Plugin Objects](#plugin-objects)
+   * [API Reference](#api-reference)
+      * [Application](#application-1)
+         * [@FastifyApplication](#fastifyapplication)
+         * [@FastifyServer()](#fastifyserver)
+      * [Controllers](#controllers-1)
+         * [@Controller(basePath?: string)](#controllerbasepath-string)
+         * [@RequestMapping(options: RequestOptions)](#requestmappingoptions-requestoptions)
+            * [Implicit routes](#implicit-routes)
+      * [Hooks](#hooks-1)
+            * [@GlobalHookContainer](#globalhookcontainer)
+            * [@Hook(hookName: string)](#hookhookname-string)
+               * [Implicit hooks](#implicit-hooks)
+      * [Plugins](#plugins-1)
+            * [@PluginContainer](#plugincontainer)
+            * [@PluginHandler(options?: FastifyPluginOptions)](#pluginhandleroptions-fastifypluginoptions)
+   * [The future](#the-future)
+      * [Cross platform](#cross-platform)
+      * [Potential features](#potential-features)
+
+<!-- Added by: tburke, at: Sun Mar 21 16:52:40 AEDT 2021 -->
+
 <!--te-->
 
 # Setup
