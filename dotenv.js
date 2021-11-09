@@ -2,6 +2,7 @@ const fs = require("fs");
 const dotenv = require("dotenv");
 const path = require("path");
 const chalk = require("chalk");
+const os = require("os");
 
 const buildEnv = process.env["FSF_START_ENV"];
 const envFilePath = path.join(
@@ -10,7 +11,7 @@ const envFilePath = path.join(
 );
 
 if (!fs.existsSync(envFilePath)) {
-  console.error(chalk.redBright(`Env file not found ${envFilePath}`));
+  console.error(chalk.redBright(`Env file not found ${envFilePath}.`));
   process.exit(1);
 }
 
@@ -21,7 +22,7 @@ const getEnv = dotenv.config({
 if (getEnv.error) {
   console.error(
     chalk.redBright(
-      `Something went wrong getting your environment file ${getEnv.error}.`
+      `Something went wrong getting your environment file:${os.EOL}${getEnv.error}.`
     )
   );
   process.exit(1);

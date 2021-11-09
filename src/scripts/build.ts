@@ -36,9 +36,21 @@ function makeDirIfNotExist(dir: string): void {
 }
 
 function removeBootstrap(): void {
-  const file = path.join(appDir, ".build", "bootstrap.js");
-  if (fs.existsSync(file)) {
-    fs.rmSync(file);
+  try {
+    const file = path.join(appDir, ".build", "bootstrap.js");
+    if (fs.existsSync(file)) {
+      if (fs.rmSync) {
+        return fs.rmSync(file);
+      }
+
+      fs.unlinkSync(file);
+    }
+  } catch (error) {
+    console.log(
+      chalk.yellow(
+        "Couldn't delete bootstrap.js, you can delete it manually from your .build folder."
+      )
+    );
   }
 }
 
@@ -124,7 +136,7 @@ function validateImportantFiles(): void {
     `A valid tsconfig is required in your project's root directory: ${appDir}`
   );
   throwIfDoesntExist(
-    path.join(appDir, "src/index.ts"),
+    path.join(appDir, "src", "index.ts"),
     chalk.redBright(
       `Missing required file ${path.join(appDir, "src", "index.ts")}`
     )
