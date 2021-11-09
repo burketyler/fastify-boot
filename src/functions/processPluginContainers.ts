@@ -19,7 +19,7 @@ export function processPluginContainers(fastify: FastifyInstance): void {
           return { pluginFn: pluginClass[methodName], methodName: methodName };
         })
         .forEach(({ pluginFn, methodName }) => {
-          registerPlugin(fastify, methodName, pluginClass, pluginFn);
+          registerPlugin(fastify, methodName, pluginClass as never, pluginFn);
         });
     });
 }
@@ -27,10 +27,10 @@ export function processPluginContainers(fastify: FastifyInstance): void {
 function registerPlugin(
   fastify: FastifyInstance,
   methodName: string,
-  pluginClass: any,
-  pluginFn: Function
+  pluginClass: never,
+  pluginFn: () => never
 ) {
-  const pluginOpts: any = Reflect.getMetadata(META_PLUGIN_OPTS, pluginFn);
+  const pluginOpts = Reflect.getMetadata(META_PLUGIN_OPTS, pluginFn);
   logger.debug(`Registering plugin: ${methodName}.`);
   fastify.register(pluginFn.bind(pluginClass), pluginOpts);
 }

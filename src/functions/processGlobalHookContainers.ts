@@ -17,14 +17,18 @@ export function processGlobalHookContainers(fastify: FastifyInstance): void {
     methodNameList
       .map((methodName: string) => hookClass[methodName])
       .forEach((hookFn) => {
-        addHook(fastify, hookClass, hookFn);
+        addHook(fastify, hookClass as never, hookFn);
       });
   });
 }
 
-function addHook(fastify: FastifyInstance, hookClass: any, hookFn: Function) {
+function addHook(
+  fastify: FastifyInstance,
+  hookClass: never,
+  hookFn: () => never
+) {
   const hookOpts: HookOptions = Reflect.getMetadata(META_HOOK_OPTS, hookFn);
   validateHook(hookOpts.name, hookFn);
   logger.debug(`Applying global hook to ${hookOpts.name}: ${hookFn}.`);
-  fastify.addHook(hookOpts.name as any, hookFn.bind(hookClass));
+  fastify.addHook(hookOpts.name as never, hookFn.bind(hookClass));
 }

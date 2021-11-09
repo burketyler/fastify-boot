@@ -10,7 +10,7 @@ import { InjectableType } from "../models/injectableType.model";
 const { injectionCtx } = useInjectionContext();
 const { logger } = useDebugger("Plugins");
 
-export function PluginContainer<T extends { new (...args: any[]): {} }>(
+export function PluginContainer<T extends { new (...args: never[]): never }>(
   classCtor: T
 ) {
   logger.debug(`Detected plugin container: ${classCtor.name}.`);

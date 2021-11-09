@@ -12,7 +12,7 @@ import { TOKEN_FASTIFY } from "../models/metaData.model";
 
 const { injectionCtx } = useInjectionContext();
 
-export function FastifyApplication<T extends { new (...args: any[]): {} }>(
+export function FastifyApplication<T extends { new (...args: never[]): never }>(
   classCtor: T
 ) {
   const { logger } = useDebugger("Bootstrap");

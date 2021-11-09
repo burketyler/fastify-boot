@@ -1,12 +1,12 @@
 import { FastifyInstance } from "fastify";
 
-export type PluginFunction = (
+export type PluginFunction<OptionsType> = (
   fastify: FastifyInstance,
-  opts: any,
+  opts: OptionsType,
   done: () => void
 ) => void;
 
-export interface PluginObject {
-  plugin: PluginFunction;
-  opts: any;
+export interface PluginObject<OptionsType> {
+  plugin: PluginFunction<OptionsType>;
+  opts: OptionsType;
 }

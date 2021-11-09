@@ -11,8 +11,8 @@ import { InjectableType } from "../models/injectableType.model";
 const { injectionCtx } = useInjectionContext();
 const { logger } = useDebugger("Controllers");
 
-export function Controller<T extends { new (...args: any[]): {} }>(
-  basePath: string = "/"
+export function Controller<T extends { new (...args: never[]): never }>(
+  basePath = "/"
 ) {
   return (classCtor: T) => {
     logger.debug(`Detected controller: ${classCtor.name}.`);

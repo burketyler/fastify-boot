@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   FastifyHttp2Options,
   FastifyHttp2SecureOptions,

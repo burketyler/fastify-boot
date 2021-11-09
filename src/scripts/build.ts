@@ -3,7 +3,9 @@ import path from "path";
 import webpack, { MultiStats, Stats, StatsCompilation } from "webpack";
 import chalk from "chalk";
 import os from "os";
-const config = require("../../../webpack.config");
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import config from "../../../webpack.config";
 
 const appDir = fs.realpathSync(process.cwd());
 const bootDir = fs.realpathSync(path.join(__dirname, "..", "..", ".."));
@@ -12,7 +14,7 @@ const webpackMode = buildEnv === "production" ? "production" : "development";
 
 build({ ...config, mode: webpackMode });
 
-function build(config: any): void {
+function build(config: Record<string, unknown>): void {
   validateImportantFiles();
   const compiler = webpack(config);
   compiler.hooks.beforeRun.tap("fastify-boot", injectBootstrap);
