@@ -31,7 +31,7 @@
   },
   "scripts": {
     "clean": "rm -rf .build",
-    "build": "yarn clean && tsc && chmod +x .build/cli.js",
+    "build": "yarn clean && tsc && chmod +x .build/bin/cli.js",
     "prettier": "prettier --check src/**/*.ts --loglevel error",
     "lint": "eslint -c .eslintrc src/**/*.ts",
     "verify": "yarn prettier && yarn lint",
