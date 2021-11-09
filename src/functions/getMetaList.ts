@@ -1,3 +1,3 @@
-export function getMetaList(target: any, symbol: any): string[] {
+export function getMetaList(target: never, symbol: never): string[] {
   return target[symbol] || [];
 }

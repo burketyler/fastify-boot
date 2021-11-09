@@ -2,11 +2,11 @@ import { FastifyInstance } from "fastify";
 
 export type PluginFunction = (
   fastify: FastifyInstance,
-  opts: any,
+  opts: never,
   done: () => void
 ) => void;
 
 export interface PluginObject {
   plugin: PluginFunction;
-  opts: any;
+  opts: never;
 }

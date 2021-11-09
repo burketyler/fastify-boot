@@ -3,7 +3,9 @@ import path from "path";
 import webpack, { MultiStats, Stats, StatsCompilation } from "webpack";
 import chalk from "chalk";
 import os from "os";
-const config = require("../../../webpack.config");
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import config from "../../../webpack.config";
 
 const appDir = fs.realpathSync(process.cwd());
 const bootDir = fs.realpathSync(path.join(__dirname, "..", "..", ".."));
@@ -12,7 +14,7 @@ const webpackMode = buildEnv === "production" ? "production" : "development";
 
 build({ ...config, mode: webpackMode });
 
-function build(config: any): void {
+function build(config: Record<string, unknown>): void {
   validateImportantFiles();
   const compiler = webpack(config);
   compiler.hooks.beforeRun.tap("fastify-boot", injectBootstrap);
@@ -36,9 +38,21 @@ function makeDirIfNotExist(dir: string): void {
 }
 
 function removeBootstrap(): void {
-  const file = path.join(appDir, ".build", "bootstrap.js");
-  if (fs.existsSync(file)) {
-    fs.rmSync(file);
+  try {
+    const file = path.join(appDir, ".build", "bootstrap.js");
+    if (fs.existsSync(file)) {
+      if (fs.rmSync) {
+        return fs.rmSync(file);
+      }
+
+      fs.unlinkSync(file);
+    }
+  } catch (error) {
+    console.log(
+      chalk.yellow(
+        "Couldn't delete bootstrap.js, you can delete it manually from your .build folder."
+      )
+    );
   }
 }
 
@@ -124,7 +138,7 @@ function validateImportantFiles(): void {
     `A valid tsconfig is required in your project's root directory: ${appDir}`
   );
   throwIfDoesntExist(
-    path.join(appDir, "src/index.ts"),
+    path.join(appDir, "src", "index.ts"),
     chalk.redBright(
       `Missing required file ${path.join(appDir, "src", "index.ts")}`
     )

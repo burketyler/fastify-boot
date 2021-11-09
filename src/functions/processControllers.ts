@@ -22,21 +22,21 @@ export function processControllers(fastify: FastifyInstance): void {
   injectionCtx.queryByType(InjectableType.CONTROLLER).forEach((ctrl) => {
     processRoutes({
       fastify,
-      ctrl,
-      routes: getMetaList(ctrl, RouteList),
-      ctrlOpts: getControllerOpts(ctrl),
-      ctrlHooks: getMetaList(ctrl, HookList),
+      ctrl: ctrl as never,
+      routes: getMetaList(ctrl as never, RouteList as never),
+      ctrlOpts: getControllerOpts(ctrl as never),
+      ctrlHooks: getMetaList(ctrl as never, HookList as never),
     });
   });
 }
 
-function getControllerOpts(ctrl: any): ControllerOptions {
+function getControllerOpts(ctrl: never): ControllerOptions {
   return Reflect.getMetadata(META_CTRL_OPTS, ctrl);
 }
 
 function processRoutes(inputs: {
   fastify: FastifyInstance;
-  ctrl: any;
+  ctrl: never;
   routes: string[];
   ctrlOpts: ControllerOptions;
   ctrlHooks: string[];
@@ -54,7 +54,7 @@ function processRoutes(inputs: {
 
 function addRoute(inputs: {
   fastify: FastifyInstance;
-  ctrl: any;
+  ctrl: never;
   route: string;
   ctrlOpts: ControllerOptions;
   ctrlHooks: string[];
@@ -76,10 +76,10 @@ function getRouteOpts(route: RouteHandler): RouteOptions {
 }
 
 function enrichRouteOpts(inputs: {
-  ctrl: any;
+  ctrl: never;
   options: RouteOptions;
   handler: RouteHandler;
-  ctrlHooks: Function[];
+  ctrlHooks: never[];
 }): RouteOptions {
   const { logger } = useDebugger("Controllers");
   logger.debug(`Adding route: ${inputs.options.method} ${inputs.options.url}.`);
@@ -97,7 +97,7 @@ function enrichRouteOpts(inputs: {
 }
 
 function addHandlerToOptions(
-  ctrl: any,
+  ctrl: never,
   handler: RouteHandler,
   options: RouteOptions
 ): RouteOptions {
@@ -108,30 +108,30 @@ function addHandlerToOptions(
 }
 
 function addAllHooksToOptions(
-  ctrl: any,
-  ctrlHooks: Function[],
+  ctrl: never,
+  ctrlHooks: never[],
   options: RouteOptions
 ): RouteOptions {
   let enrichedOptions = { ...options };
-  for (let hook of ctrlHooks) {
+  for (const hook of ctrlHooks) {
     enrichedOptions = addHookToOptionsIfDoesntExist(ctrl, hook, options);
   }
   return enrichedOptions;
 }
 
 function addHookToOptionsIfDoesntExist(
-  ctrl: any,
-  hookFn: Function,
+  ctrl: never,
+  hookFn: () => never,
   options: RouteOptions
 ): RouteOptions {
   const { logger } = useDebugger("Controllers");
   const enrichedOpts = { ...options };
   const hookOpts: HookOptions = Reflect.getMetadata(META_HOOK_OPTS, hookFn);
   validateHook(hookOpts.name, hookFn);
-  const existingHook = (enrichedOpts as any)[hookOpts.name];
+  const existingHook = enrichedOpts[hookOpts.name];
   if (!existingHook) {
     logger.debug(`Applying controller hook: ${hookOpts.name} ${hookFn}.`);
-    (enrichedOpts as any)[hookOpts.name] = hookFn.bind(ctrl);
+    enrichedOpts[hookOpts.name] = hookFn.bind(ctrl);
   } else {
     logger.debug(
       `Detected route hook: ${hookOpts.name}, don't apply controller hook.`
