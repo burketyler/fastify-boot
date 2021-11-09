@@ -2,6 +2,7 @@ import "reflect-metadata";
 import {
   makeClassInjectable,
   META_TYPE,
+  Newable,
   useDebugger,
   useInjectionContext,
 } from "ts-injection";
@@ -11,9 +12,7 @@ import { InjectableType } from "../models/injectableType.model";
 const { injectionCtx } = useInjectionContext();
 const { logger } = useDebugger("Controllers");
 
-export function Controller<T extends { new (...args: never[]): never }>(
-  basePath = "/"
-) {
+export function Controller<T extends Newable>(basePath = "/") {
   return (classCtor: T) => {
     logger.debug(`Detected controller: ${classCtor.name}.`);
     const token = makeClassInjectable(classCtor);
