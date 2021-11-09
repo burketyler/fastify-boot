@@ -13,7 +13,10 @@ export function processPluginContainers(fastify: FastifyInstance): void {
   injectionCtx
     .queryByType(InjectableType.PLUGIN_CONT)
     .forEach((pluginClass) => {
-      const methodNameList = getMetaList(pluginClass, PluginList);
+      const methodNameList = getMetaList(
+        pluginClass as never,
+        PluginList as never
+      );
       methodNameList
         .map((methodName: string) => {
           return { pluginFn: pluginClass[methodName], methodName: methodName };

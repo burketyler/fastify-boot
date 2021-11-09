@@ -23,9 +23,9 @@ export function processControllers(fastify: FastifyInstance): void {
     processRoutes({
       fastify,
       ctrl: ctrl as never,
-      routes: getMetaList(ctrl, RouteList),
+      routes: getMetaList(ctrl as never, RouteList as never),
       ctrlOpts: getControllerOpts(ctrl as never),
-      ctrlHooks: getMetaList(ctrl, HookList),
+      ctrlHooks: getMetaList(ctrl as never, HookList as never),
     });
   });
 }

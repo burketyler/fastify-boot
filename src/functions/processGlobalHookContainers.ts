@@ -13,7 +13,7 @@ const { logger } = useDebugger("Hooks");
 export function processGlobalHookContainers(fastify: FastifyInstance): void {
   logger.debug("Processing global hook containers.");
   injectionCtx.queryByType(InjectableType.HOOK_CONT).forEach((hookClass) => {
-    const methodNameList = getMetaList(hookClass, HookList);
+    const methodNameList = getMetaList(hookClass as never, HookList as never);
     methodNameList
       .map((methodName: string) => hookClass[methodName])
       .forEach((hookFn) => {
